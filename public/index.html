@@ -1,0 +1,19 @@
+<html>
+
+<body>
+    <div>
+        <input id="on" onclick="on()" type="button" value="ON 24 DEGRES">
+        <input id="off" onclick="off()" type="button" value="OFF">
+    </div>
+</body>
+<script>
+function on() {
+    fetch("/heating/salon/24");
+}
+function off() {
+    fetch("heating/salon/off");
+}
+
+</script>
+
+</html>
