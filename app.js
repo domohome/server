@@ -6,8 +6,20 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var scheduler = require('node-schedule');
 var app = express();
+const airton =require('./src/AirtonService/AirtonDriver');
+
+/**
+ * scheduler
+ *
+ */
+var test = scheduler.scheduleJob('0 4 * * *', function() {
+  console.log('sending command to airton driver');
+	airton.setOn24Hot();
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
