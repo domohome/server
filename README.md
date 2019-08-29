@@ -1,2 +1,0 @@
-# server
-domohome web server
