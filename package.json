@@ -1,0 +1,29 @@
+{
+  "name": "domohomeserver",
+  "version": "1.0.0",
+  "description": "custom domotique server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "TS_NODE_FILES=true ts-node server/main.ts | ./node_modules/.bin/bunyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/domohome/server.git"
+  },
+  "author": "sylvain121",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/domohome/server/issues"
+  },
+  "homepage": "https://github.com/domohome/server#readme",
+  "dependencies": {
+    "@types/bunyan": "^1.8.6",
+    "bunyan": "^1.8.12",
+    "inversify": "^5.0.1",
+    "inversify-express-utils": "^6.3.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.6.2"
+  }
+}
