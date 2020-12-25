@@ -1,16 +1,18 @@
 import 'reflect-metadata';
-import {Container, inject, injectable} from 'inversify';
+import { Container, inject, injectable } from 'inversify';
 import TYPES from '../core/types';
-import {Application, Express, Request, Response} from 'express';
+import { Application, Express, request, Request, response, Response } from 'express';
 import helmet = require('helmet');
 import bodyParser = require('body-parser');
 import cors = require('cors');
-import {InversifyExpressServer} from 'inversify-express-utils';
+import { InversifyExpressServer } from 'inversify-express-utils';
 
 @injectable()
 export class WebServer {
 
-    constructor(@inject(TYPES.IoCcontainer) private iocContainer: Container) {
+    constructor(
+        @inject(TYPES.IoCcontainer) private iocContainer: Container,
+        @inject(TYPES.Password) private password: string) {
     }
 
 
@@ -23,10 +25,20 @@ export class WebServer {
         }));
         app.use(bodyParser.json());
 
+
+        /*app.use((req: Request, res: Response, next: Function) => {
+                const body = req.body;
+                if(body.password === this.password) {
+                    return next();
+                } else {
+                    return res.status(401).send("Unauthorized");
+                }
+        });*/
+
         app.get('/health', (req: Request, res: Response) => {
             res.status(200).json({
                 status: 'alive',
-                appName: 'planning',
+                appName: 'domohome',
                 version: require('../../package.json').version
             });
         });
@@ -34,7 +46,8 @@ export class WebServer {
 
 
     public async importController() {
-        await import('./Controllers/Root');
+        await import('./Controllers/Home');
+        await import('./Controllers/Site');
     }
 
     public run() {
