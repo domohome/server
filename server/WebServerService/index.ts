@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Container, inject, injectable } from 'inversify';
 import TYPES from '../core/types';
-import { Application, Express, request, Request, response, Response } from 'express';
+import { Application, Express, request, Request, response, Response, static as expressStatic } from 'express';
 import helmet = require('helmet');
 import bodyParser = require('body-parser');
 import cors = require('cors');
@@ -23,6 +23,7 @@ export class WebServer {
         app.use(bodyParser.urlencoded({
             extended: true,
         }));
+        app.use(expressStatic('public'));
         app.use(bodyParser.json());
 
 
@@ -47,7 +48,6 @@ export class WebServer {
 
     public async importController() {
         await import('./Controllers/Home');
-        await import('./Controllers/Site');
     }
 
     public run() {
