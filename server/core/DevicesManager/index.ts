@@ -6,6 +6,7 @@ export namespace DevicesManager {
     const log = new Logger();
 
     export function add( stream : Duplex) {
+	log.info('adding device');
         devices.add(stream);
         stream.on('error', ()=> {
             log.warn(`error on stream ... closing`);

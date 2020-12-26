@@ -1,4 +1,6 @@
 import {scheduleJob, Job} from 'node-schedule';
+import { AirtonDriver } from '../Drivers/AirtonDriver';
+
 
 export namespace SchedulerService {
     let heatJob: Job;
@@ -6,9 +8,9 @@ export namespace SchedulerService {
 
     export function addHeatJob(startHour: number ) {
         deleteHeatJob();
-        heatJob = scheduleJob('42 * * * *', function(){
-            console.log('The answer to life, the universe, and everything!');
-          });
+        heatJob = scheduleJob(`0 ${startHour} * * *`, ()=>{
+            AirtonDriver.setOn24Hot();
+	  });
           console.log(heatJob.name);
     }
 
