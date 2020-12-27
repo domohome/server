@@ -14,9 +14,9 @@ interface jobsOrder {
 export class RootController implements interfaces.Controller {
     private log = new Logger();
 
-    @httpGet('/')
+    @httpGet('/job')
     public async get(req: Request, res: Response) {
-        res.status(200).send("Hello World");
+      res.status(200).json(SchedulerService.getJob());
     }
 
     @httpPost('/heat')
