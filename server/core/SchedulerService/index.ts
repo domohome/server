@@ -4,29 +4,32 @@ import {Logger} from 'tslog';
 
 
 export namespace SchedulerService {
-    const log = new Logger();
-    let heatJob: Job;
-    let hour:number | undefined;         
+  const log = new Logger();
+  let heatJob: Job;
+  let hour:number | undefined;         
 
-    export function addHeatJob(startHour: number ) {
-        deleteHeatJob();
-      	hour = startHour;
-        heatJob = scheduleJob(`0 ${startHour} * * *`, ()=>{
-            log.debug("Sending on24Hot command to Airton salon"); 
-	    AirtonDriver.setOn24Hot();
-	  });
+  export function addHeatJob(startHour: number ) {
+    deleteHeatJob();
+    hour = startHour;
+    heatJob = scheduleJob(`0 ${startHour} * * *`, ()=>{
+      log.debug("Sending on24Hot command to Airton salon"); 
+      AirtonDriver.setOn24Hot();
+    });
+  }
+
+  export function deleteHeatJob() {
+    if(heatJob) {
+      heatJob.cancel();
+      hour = undefined;
+    }
+  }
+
+  export function getJob() {
+    if(heatJob) {
+      return {hour: hour, enable:true };
+    } else {
+      return {hour: undefined, enable: false};
     }
 
-    export function deleteHeatJob() {
-        if(heatJob) {
-            heatJob.cancel();
-	    hour = undefined;
-        }
-    }
-
-    export function getJob() {
-        if(heatJob) {
-           return {hour: hour, enable:true };
-        }
-    }
+  }
 }

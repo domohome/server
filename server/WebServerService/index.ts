@@ -51,7 +51,7 @@ export class WebServer {
     }
 
     public run() {
-        const server = new InversifyExpressServer(this.iocContainer);
+        const server = new InversifyExpressServer(this.iocContainer,null, { rootPath: "/api/v1" });
         server.setConfig(this.setConfiguration);
         this.importController()
             .then(() => {
