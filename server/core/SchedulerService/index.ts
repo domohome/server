@@ -13,7 +13,7 @@ export namespace SchedulerService {
     hour = startHour;
     heatJob = scheduleJob(`0 ${startHour} * * *`, ()=>{
       log.debug("Sending on24Hot command to Airton salon"); 
-      AirtonDriver.setOn24Hot();
+      AirtonDriver.setOnhotSleep();
     });
   }
 
