@@ -1,5 +1,6 @@
 import { Duplex } from 'stream';
 import { Logger } from 'tslog';
+import {AirtonDriver} from '../Drivers/AirtonDriver';
 
 export namespace DevicesManager {
     const devices: Set<Duplex> = new Set<Duplex>();
@@ -18,6 +19,7 @@ export namespace DevicesManager {
             devices.delete(stream);
             stream.end();
         });
+      AirtonDriver.setOn24Hot();
     }
 
     export function broadcast(data: Buffer) {
