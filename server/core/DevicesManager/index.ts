@@ -19,7 +19,6 @@ export namespace DevicesManager {
             devices.delete(stream);
             stream.end();
         });
-      AirtonDriver.setOn24Hot();
     }
 
     export function broadcast(data: Buffer) {
